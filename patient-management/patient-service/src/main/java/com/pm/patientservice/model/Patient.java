@@ -11,7 +11,8 @@ import java.util.UUID;
 public class Patient {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
+    @Column(columnDefinition = "uuid DEFAULT gen_random_uuid()")
     private UUID id;
 
     @NotNull
