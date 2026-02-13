@@ -50,7 +50,7 @@ public class PatientService { //DTO conversion for a given patient
         Patient patient = patientRepository.findById(id).orElseThrow(()->
                 new PatientNotFoundException("Patient not found with ID: " + id));
 
-        if(patientRepository.existsByEmail(patientRequestDTO.getEmail())){
+        if(patientRepository.existsByEmailAndIdNot(patientRequestDTO.getEmail(), id)){
             throw new EmailAlreadyExistsException("A patient of this email already exists"
                     + "already exists" + patientRequestDTO.getEmail());
         }
