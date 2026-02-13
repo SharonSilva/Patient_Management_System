@@ -1,6 +1,7 @@
 package com.pm.patientservice.service;
 
 import com.pm.patientservice.DTO.PatientResponseDTO;
+import com.pm.patientservice.mapper.PatientMapper;
 import com.pm.patientservice.model.Patient;
 import com.pm.patientservice.repository.PatientRepository;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,12 @@ public class PatientService { //DTO conversion for a given patient
         this.patientRepository = patientRepository;
     }
 
-    public List<PatientResponseDTO> getPatients(){
+    public List<PatientResponseDTO> getPatients() {
         List<Patient> patients = patientRepository.findAll();
+        List<PatientResponseDTO> patientResponseDTOs = patients.stream().map(
+                PatientMapper::toDTO).toList();
+
+        return patientResponseDTOs;
 
     }
 }
